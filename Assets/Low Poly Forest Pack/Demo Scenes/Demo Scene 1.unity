@@ -6992,6 +6992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rgbd: {fileID: 919272453}
   thrust: 100
+  thrustSensitivity: 0.1
   pitchDeg: 0.5
   rollDeg: 0.5
   yawDeg: 0.5

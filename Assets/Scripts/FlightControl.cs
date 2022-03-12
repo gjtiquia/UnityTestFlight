@@ -11,6 +11,7 @@ public class FlightControl : MonoBehaviour
     [SerializeField] float yawDeg;
 
     private bool turtle = false;
+    private int thrusting = 0;
     private int pitching = 0;
     private int rolling = 0;
     private int yawing = 0;
@@ -31,13 +32,21 @@ public class FlightControl : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 146.78f, 0);
         }
 
-        // Thrust
-        if (Input.GetButton("Jump")) rgbd.AddForce(transform.up * Physics.gravity.magnitude * thrust * Time.deltaTime);
+        // Thrust Up
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            thrusting = 1;
+        }
+        if (Input.GetKeyUp(KeyCode.W)) thrusting = 0;
 
-        // Global Up
-        if (Input.GetKeyDown(KeyCode.W)) turtle = true;
-        if (Input.GetKeyUp(KeyCode.W)) turtle = false;
-        
+        // Thrust Down
+        if (Input.GetKeyDown(KeyCode.S)) thrusting = -1;
+        if (Input.GetKeyUp(KeyCode.S)) thrusting = 0;
+
+        // Global Up (Turtle)
+        if (Input.GetKeyDown(KeyCode.E)) turtle = true;
+        if (Input.GetKeyUp(KeyCode.E)) turtle = false;
+
         // Pitch Forward
         if (Input.GetKeyDown(KeyCode.I)) pitching = 1;
         if (Input.GetKeyUp(KeyCode.I)) pitching = 0;
@@ -65,14 +74,13 @@ public class FlightControl : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Turtle
         if (turtle) rgbd.AddForce(Vector3.up * Physics.gravity.magnitude * thrust * Time.fixedDeltaTime);
 
-        //transform.eulerAngles = (new Vector3(
-        //        transform.eulerAngles.x + pitching * pitchDeg,
-        //        transform.eulerAngles.y + yawing * yawDeg,
-        //        transform.eulerAngles.z + rolling * rollDeg
-        //    ));
-
+        // Roll, Pitch, Yaw
         transform.Rotate(pitching * pitchDeg, yawing * yawDeg, rolling * rollDeg, Space.Self);
+
+        // Thrust
+        rgbd.AddForce(transform.up * Physics.gravity.magnitude * thrust * thrusting * Time.fixedDeltaTime);
     }
 }
