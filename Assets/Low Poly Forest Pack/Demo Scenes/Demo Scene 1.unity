@@ -2534,6 +2534,7 @@ GameObject:
   - component: {fileID: 919272450}
   - component: {fileID: 919272449}
   - component: {fileID: 919272453}
+  - component: {fileID: 919272454}
   m_Layer: 0
   m_Name: Player Cube
   m_TagString: Untagged
@@ -2634,6 +2635,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &919272454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919272448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95fa09714ae004a34a9a27acf16223c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &922731702
 PrefabInstance:
   m_ObjectHideFlags: 0
